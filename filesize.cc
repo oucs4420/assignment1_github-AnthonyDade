@@ -1,18 +1,30 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
-// output format to use IDENTICALLY:
-//BSH:Saru> ./filesize input.3lines input.1line 
-//program: ./filesize
-// input.3lines: 3
-// input.1line: 1
 
 int main( int argc, char* argv[] )
 {
-    // just to get you started, this is how to refer to the arguments that were passed
-    for (int arg = 0; arg < argc; ++arg)
-            std::cout << "argv[" << arg << "]: " << argv[arg] << '\n' ;
+    string temp;
+    cout << "program: " << argv[0] << '\n';
 
-    exit(0); // this means that the program executed correctly!
+    for (int arg = 1; arg < argc; ++arg)
+    {
+            int n = 0;  
+            cout << " " << argv[arg] << ": ";
+            ifstream file(argv[arg]);   // Open the file found at the current index of argument vector
+
+            if (!file)  // If file doesnt exist num lines is -1
+            {
+                n = -1;
+            }   
+            while(getline(file, temp))  // If a line is present increment n
+            {
+                n++;
+            }
+            cout << n << '\n';
+    }
+
+    exit(0); 
 }
